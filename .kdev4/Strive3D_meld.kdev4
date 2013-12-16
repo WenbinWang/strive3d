@@ -1,0 +1,11 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x1a\x00S\x00t\x00r\x00i\x00v\x00e\x003\x00D\x00_\x00m\x00e\x00l\x00d)
+
+[CMake]
+BuildDirs=/home/kyocoso/buil
+CMakeDir=/usr/share/cmake-2.8/Modules
+Current CMake Binary=file:///usr/bin/cmake
+CurrentBuildDir=file:///home/kyocoso/buil
+CurrentBuildType=Debug
+CurrentInstallDir=
+ProjectRootRelative=./

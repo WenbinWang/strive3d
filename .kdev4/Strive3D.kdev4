@@ -1,0 +1,15 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Number of Builditems=0
+
+[CMake]
+BuildDirs=/home/kyocoso/Strive3DbuildDir
+CMakeDir=/usr/share/cmake/Modules
+Current CMake Binary=file:///usr/bin/cmake
+CurrentBuildDir=file:///home/kyocoso/Strive3DbuildDir
+CurrentBuildType=
+CurrentInstallDir=
+ProjectRootRelative=./
+
+[Project]
+VersionControlSupport=kdevgit

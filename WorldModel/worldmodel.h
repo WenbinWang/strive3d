@@ -169,10 +169,6 @@ private:
 	salt::Matrix   	mVisionPerceptorMatrix, mPrevVisionPerceptorMatrix;
 
 	Matrix transformMat;//for change the Robot's world coordinate to Vision coordinate 
-	
-	int             	mLeftFlagsSee;
-	
-	int            	 mRightFlagsSee;
 
 	int			mHearCycles;
 	

@@ -286,8 +286,6 @@ void WorldModel::ShiftInfo()
 void WorldModel::ResetInfo()
 {
     aLOG<<"### Reset"<<endl;
-	mLeftFlagsSee   = 0;
-	mRightFlagsSee  = 0;
 
 	WM.getSelf().mLFForce.Zero();  
 	WM.getSelf().mRFForce.Zero();
@@ -580,10 +578,10 @@ void WorldModel::UpdatePlayers()//Neil 2009.3
 
 void WorldModel::UpdateFieldInfo()
 {
-  if(mVisionSenseMap[GOAL_1_R].distance > 0)
-  {	
-	mFieldInfo->oppleftgoallocal = mVisionSenseMap[GOAL_1_R].localPos;
-  }
+	if(mVisionSenseMap[GOAL_1_R].distance > 0)
+	{	
+	    mFieldInfo->oppleftgoallocal = mVisionSenseMap[GOAL_1_R].localPos;
+	}
 
 	if(mVisionSenseMap[GOAL_2_R].distance > 0)
 	{
@@ -625,8 +623,7 @@ void WorldModel::CalculateVisionObjectLocalPos()
 
 	aLOG << "Object:" << i <<" x:" <<  vs.localPosInVision[0] << " y:"<< vs.localPosInVision[1] << " z:"<< vs.localPosInVision[2] << endl;
 	aLOG << "Object:" << i <<" x:" <<  vs.localPos[0] << " y:"<< vs.localPos[1] << " z:"<< vs.localPos[2] << endl;
-        if (i < static_cast<int>(BALL))
-            i % 2 == 0 ? ++mLeftFlagsSee : ++mRightFlagsSee;
+
     }
 	aLOG << "**************************************************" << endl;
 }
@@ -872,7 +869,7 @@ bool WorldModel::Localize()
 {	
     Vector3f pos(0.0f, 0.0f, 0.0f);
     Matrix mat;
- int count = 0;
+ int count = 0;	
 	VisionObject flag[3];
 	Vector3f coordinate[3];
 	for(int i = (int)(FLAG_1_L); i <= GOAL_2_R; i++)

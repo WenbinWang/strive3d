@@ -4,7 +4,7 @@ Number of Builditems=0
 
 [CMake]
 BuildDirs=/home/kyocoso/Strive3DbuildDir
-CMakeDir=/usr/share/cmake/Modules
+CMakeDir=/usr/share/cmake-2.8/Modules
 Current CMake Binary=file:///usr/bin/cmake
 CurrentBuildDir=file:///home/kyocoso/Strive3DbuildDir
 CurrentBuildType=

@@ -38,11 +38,12 @@ public:
 	queue<Vector3f> positionqueue;	//By Qu Junjun 2009.10.4		Recorde The Past Position For Vel Cauculating
 	vector<Vector3f> area;			//By Qu Junjun 2009.10.4		The Posible Moving Area Of The Player
 
-	//Zheng Yonglei 2009.1.19 [start]
 	bool isValid(){return mIsValid;}
+	
 	void setIsValid(bool arg){mIsValid = arg;}
 	
 	float getLastUpdateTime(){return mLastUpdateTime;}
+	
 	void setLastUpdateTime(float arg){mLastUpdateTime = arg;}
 	//Zheng Yonglei 2009.1.19 [end]
 };

@@ -54,9 +54,6 @@ void FieldInfo::Init()
     
     ourgoalcenter = Vector3f(-fieldlength/2, 0.0f, 0.0f);
     oppgoalcenter = Vector3f(fieldlength/2, 0.0f, 0.0f);
-
-    canseeoppleftgoal = false;
-    canseeopprightgoal = false;
 }
 
 void FieldInfo::SetupPlayModeMap()

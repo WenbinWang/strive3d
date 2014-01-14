@@ -37,7 +37,6 @@ class Ball : public DynamicObject
 public:
     Ball();
     ~Ball();
-
 	inline void SetBallDistance(double bDistance )
 		{	ballDistance = bDistance;
 		}
@@ -66,6 +65,7 @@ public:
 		{	return ballTheta;}
 	inline const double GetBallPhi()
 		{	return ballPhi;}
+		
 	void setPos(Vector3f Pos)
 	{
 		pos = Pos;

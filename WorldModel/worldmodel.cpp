@@ -583,17 +583,12 @@ void WorldModel::UpdateFieldInfo()
   if(mVisionSenseMap[GOAL_1_R].distance > 0)
   {	
 	mFieldInfo->oppleftgoallocal = mVisionSenseMap[GOAL_1_R].localPos;
-	mFieldInfo->canseeoppleftgoal = true;
   }
-	else
- 	    mFieldInfo->canseeoppleftgoal = false;
+
 	if(mVisionSenseMap[GOAL_2_R].distance > 0)
 	{
 	    mFieldInfo->opprightgoallocal = mVisionSenseMap[GOAL_2_R].localPos;
-	    mFieldInfo->canseeopprightgoal = true;
 	}
-	else
-	    mFieldInfo->canseeopprightgoal = false;
 
 	mFieldInfo->oppgoalcenterlocal = mVisionSenseMap[GOAL_1_R].localPos + mVisionSenseMap[GOAL_2_R].localPos;
 	mFieldInfo->oppgoalcenterlocal = mFieldInfo->oppgoalcenterlocal * 0.5;

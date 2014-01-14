@@ -69,9 +69,6 @@ public:
     salt::Vector3f ourrightgoallocal;
     salt::Vector3f ourgoalcenterlocal;
 
-    bool canseeoppleftgoal;
-    bool canseeopprightgoal;
-
 protected:
 
     void SetupPlayModeMap();

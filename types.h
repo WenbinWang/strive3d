@@ -39,11 +39,13 @@ struct VisionSense
     /** phi is the latitude angle */
     double phi;
 
+    double distanceToSelf;
+    
     salt::Vector3f localPos;//local position for the robot's torso coordinate
 
     salt::Vector3f realPos;
 
-	salt::Vector3f localPosInVision;//local position for the vision coordinate
+    salt::Vector3f localPosInVision;//local position for the vision coordinate
 
     /** init with some big number to find out bug easlier */
     VisionSense() : distance(-1000.0), theta(-1000.0), phi(-1000.0) {};

@@ -28,6 +28,7 @@ class DynamicObject : public Object
 protected:
 	bool mIsValid;
 	float mLastUpdateTime;	
+	Vector3f pos_by_hearing;
 	
 public:
 	DynamicObject():mIsValid(false){}
@@ -48,9 +49,28 @@ public:
 	void setLastUpdateTime(float arg){mLastUpdateTime = arg;}
 	
 	//Zheng Yonglei 2009.1.19 [end]
+
+	void SetGlobalPos(Vector3f pos_){pos = pos_;}
 	
-	void setLocalPos(Vector3f pos_){pos_local = pos_;}
-	void setGlobalPos(Vector3f pos_){pos = pos_;}
+	
+	inline void SetLocalPos( Vector3f localpos)
+	{	
+	  pos_local = localpos;
+	}
+	inline void SetHearingPos( Vector3f hearingpos)
+	{	
+	  pos_by_hearing = hearingpos;
+	}
+	
+	inline const Vector3f GetLocalPos()
+	{	return pos_local;}
+
+	inline const Vector3f GetHearingPos()
+	{	return pos_by_hearing;}
+	
+	inline const Vector3f GetPos()
+	{	return pos;}
+
 };
 
 #endif

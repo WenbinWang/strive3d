@@ -37,34 +37,6 @@ class Ball : public DynamicObject
 public:
     Ball();
     ~Ball();
-	inline void SetBallDistance(double bDistance )
-		{	ballDistance = bDistance;
-		}
-	inline void SetBallTheta(double bTheta)
-		{	ballTheta = bTheta;
-		}
-	inline void SetBallPhi(double bPhi)
-		{	ballPhi = bPhi;
-		}
-	inline void SetBallLocalPos( Vector3f bLocalPos)
-		{	ballLocalPos = bLocalPos;
-		}
-	inline void SetBallPosByCommunication( Vector3f bPos)
-		{	ballPosByCommunication = bPos;
-		}
-	
-	inline const Vector3f GetBallLocalPos()
-		{	return ballLocalPos;}
-
-	inline const Vector3f GetBallPosByCommunication()
-		{	return ballPosByCommunication;}
-
-	inline const double GetBallDistance()
-		{	return ballDistance;}
-	inline const double GetBallTheta()
-		{	return ballTheta;}
-	inline const double GetBallPhi()
-		{	return ballPhi;}
 		
 	void setPos(Vector3f Pos)
 	{

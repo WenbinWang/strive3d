@@ -305,6 +305,7 @@ void WorldModel::ResetInfo()
 	{
 		VisionSense &vs = mVisionSenseMap[static_cast<VisionObject>(i)];
 		vs.distance = -1000;
+		vs.distanceToSelf = -1000;
 	}
 	
 }
@@ -394,7 +395,7 @@ void WorldModel::Update(const string& message)
 	if (mSimTime > 1.0f && gAbs(mSimTime - mLastSimTime - 0.02) > 1e-3)
 		cerr << "(Time Jump) "<< mLastSimTime << " " << mSimTime << endl;
     aLOG<<"################ Update Finished  #################"<<endl;
-    dr->draw_trajectory(mSelf->pos);
+    dr->draw_trajectory(mBall->pos);
 }
 
 void WorldModel::UpdateSelf()
@@ -418,12 +419,9 @@ void WorldModel::UpdateSelf()
 void WorldModel::UpdateBall()
 {	
     aLOG<<"### UpdateBall"<<endl;
-    mBall->SetBallDistance(mVisionSenseMap[BALL].distance);
- 	aLOG << "mBall->GetBallDistance(): " << mBall->GetBallDistance() << endl;
-	mBall->SetBallTheta(gNormalizeDeg(mVisionSenseMap[BALL].theta));
-	mBall->SetBallPhi(gNormalizeDeg(mVisionSenseMap[BALL].phi));
-	mBall->SetBallLocalPos(mVisionSenseMap[BALL].localPos);
-	if(mCanLocalize && mBall->GetBallDistance() > 0)
+	mBall->SetLocalPos(mVisionSenseMap[BALL].localPos);
+	mBall->SetDistanceToSelf(mVisionSenseMap[BALL].distanceToSelf);
+	if(mCanLocalize && mBall->GetDistanceToSelf() > 0)
 	{
 		mBall->setPos(mVisionPerceptorMatrix * (mVisionSenseMap[BALL].localPos));
 	}
@@ -619,6 +617,8 @@ void WorldModel::CalculateVisionObjectLocalPos()
         vs.localPosInVision[0] = distance * gCos(phi) * gCos(theta);
         vs.localPosInVision[1] = distance * gCos(phi) * gSin(theta);
         vs.localPosInVision[2] = distance * gSin(phi);
+
+	vs.distanceToSelf = vs.distance*gCos(gDegToRad(vs.phi));
 	
 	 /**add by Neil*/
 	vs.localPos = NAO->GetRobotCameraMatrix(Nao::PART_HEAD) * vs.localPosInVision;
@@ -848,9 +848,9 @@ bool WorldModel::UpdateWithHearInfomation()
 			if(num == getSelf().GetUnum())
 			{
 				mSelf->posbyhearing = pos;
-				aLOG << "Hearing: " << "selfpos: " << pos << "ballpos: " << mBall->posbyhearing << "balllocal: " << mBall->GetBallLocalPos()
+				aLOG << "Hearing: " << "selfpos: " << pos << "ballpos: " << mBall->posbyhearing << "balllocal: " << mBall->GetLocalPos()
 				<< "yawangle: " << mSelf->mTorsoYawAngle << endl;
-				Vector3f balllocal3f = mBall->GetBallLocalPos();
+				Vector3f balllocal3f = mBall->GetLocalPos();
 				Vector3f ballbycommunication = mBall->posbyhearing;
 				Vector2f balllocal = balllocal3f.to2D();
 				Vector2f agent2ball =  ballbycommunication.to2D() - pos.to2D();

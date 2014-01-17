@@ -34,9 +34,9 @@ void NaoBehaviorControl::GoToBall()
     double maxTurnSpeed = 5.0;
     float yOffset = 0.105;
 
-    double angleToBall = gNormalizeDeg(WM.getBall().GetBallTheta());
-    double distanceToBall = WM.getBall().GetBallDistance()*gCos(gDegToRad(WM.getBall().GetBallPhi()));
-    Vector3f ballLocalPos = WM.getBall().GetBallLocalPos();
+    double angleToBall = gNormalizeDeg(WM.getVisionSense(BALL).theta);
+    double distanceToBall = WM.getBall().GetDistanceToSelf();
+    Vector3f ballLocalPos = WM.getBall().GetLocalPos();
     aLOG << "distanceToBall: " << distanceToBall<< " angleToBall: "<<angleToBall <<endl;
     Vector2f destination( ballLocalPos[0]-0.042f,ballLocalPos[1]+yOffset );
     aLOG << "ballLocalPos: " << ballLocalPos[0] <<", "<< ballLocalPos[1] <<endl;
@@ -97,7 +97,7 @@ void NaoBehaviorControl::GoToBallByCommunication()
     float yOffset = 0.105;
 
 // 	Vector3f ballWorldPos = WM.getBall().pos;
-    Vector3f ballWorldPos = WM.getBall().GetBallPosByCommunication();
+    Vector3f ballWorldPos = WM.getBall().GetLocalPos();
     Vector3f agentWorldPos = WM.getSelf().pos;
     Vector2f ballToAgent = ballWorldPos.to2D() - agentWorldPos.to2D();
     double distanceToBall = ballToAgent.Length();
@@ -161,9 +161,9 @@ void NaoBehaviorControl::GoToBallWithoutTurning()
     double maxSpeed = 0.6;
     float yOffset = 0.105;
 
-    double angleToBall = gNormalizeDeg(WM.getBall().GetBallTheta());
-    double distanceToBall = WM.getBall().GetBallDistance()*gCos(gDegToRad(WM.getBall().GetBallPhi()));
-    Vector3f ballLocalPos = WM.getBall().GetBallLocalPos();
+    double angleToBall = gNormalizeDeg(WM.getVisionSense(BALL).theta);
+    double distanceToBall = WM.getBall().GetDistanceToSelf();
+    Vector3f ballLocalPos = WM.getBall().GetLocalPos();
     aLOG << "distanceToBall: " << distanceToBall<< " angleToBall: "<<angleToBall <<endl;
     Vector2f destination( ballLocalPos[0],ballLocalPos[1] );
     aLOG << "ballLocalPos: " << ballLocalPos[0] <<", "<< ballLocalPos[1] <<endl;
@@ -468,8 +468,8 @@ void NaoBehaviorControl::TurnTo(double angleToDestination)
 bool NaoBehaviorControl::ArriveKickPosition()
 {
 
-    float AdjustY=WM.getBall().GetBallLocalPos().y()-WM.getSelf().GetLeftFootLocalPosition().y();
-    float AdjustX=(WM.getBall().GetBallLocalPos().x()-0.01)-WM.getSelf().GetLeftFootLocalPosition().x();
+    float AdjustY=WM.getBall().GetLocalPos().y()-WM.getSelf().GetLeftFootLocalPosition().y();
+    float AdjustX=(WM.getBall().GetLocalPos().x()-0.01)-WM.getSelf().GetLeftFootLocalPosition().x();
     switch (adjustment)
     {
     case adjustX:
@@ -503,14 +503,14 @@ bool NaoBehaviorControl::ArriveKickPosition()
 
 void NaoBehaviorControl::execute()
 {
-    Vector2f Destination2D(WM.getBall().GetBallLocalPos().x(), WM.getBall().GetBallLocalPos().y());
+    Vector2f Destination2D(WM.getBall().GetLocalPos().x(), WM.getBall().GetLocalPos().y());
 
-    double angleToDestination = gRadToDeg(gArcTan2(WM.getBall().GetBallLocalPos().y(),WM.getBall().GetBallLocalPos().x()));
+    double angleToDestination = gRadToDeg(gArcTan2(WM.getBall().GetLocalPos().y(),WM.getBall().GetLocalPos().x()));
 
     double distanceToDestination = Destination2D.Length();
 
     if (distanceToDestination > 0.5)
-        GoToRelativePoint(WM.getBall().GetBallLocalPos());
+        GoToRelativePoint(WM.getBall().GetLocalPos());
     else if ( ArriveKickPosition())
     {
         Stop();

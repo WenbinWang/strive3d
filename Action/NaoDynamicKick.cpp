@@ -440,18 +440,18 @@ void NaoDynamicKickEngine::kickLeft3()
 		
 		float Force = 1.0;	//!Force: 0.0~1.0
 //		float Direction = 10.0;	//!Direction: 0.0~30.0
-		Vector3f BallLocalPostoBody = WM.getBall().GetBallLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
+		Vector3f BallLocalPostoBody = WM.getBall().GetLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
 		BallLocalPostoBody.z() = BallLocalPostoBody.x();
 		BallLocalPostoBody.x() = -BallLocalPostoBody.y();
 		BallLocalPostoBody.y() = BallLocalPostoBody.z();
 		BallLocalPostoBody.z() = 0.00;
-		Vector3f BallLocalPostoRightFoot = WM.getBall().GetBallLocalPos() - WM.getSelf().GetRightFootLocalPosition();
+		Vector3f BallLocalPostoRightFoot = WM.getBall().GetLocalPos() - WM.getSelf().GetRightFootLocalPosition();
 		BallLocalPostoRightFoot.z() = BallLocalPostoRightFoot.x();
 		BallLocalPostoRightFoot.x() = -BallLocalPostoRightFoot.y();
 		BallLocalPostoRightFoot.y() = BallLocalPostoRightFoot.z();
 // 		BallLocalPostoRightFoot.z() = 0.042;
 		BallLocalPostoRightFoot.z() = 0;
-		Vector3f BallLocalPos = WM.getBall().GetBallLocalPos();
+		Vector3f BallLocalPos = WM.getBall().GetLocalPos();
 		BallLocalPos.z() = BallLocalPos.x();
 		BallLocalPos.x() = -BallLocalPos.y();
 		BallLocalPos.y() = BallLocalPos.z();
@@ -809,18 +809,18 @@ void NaoDynamicKickEngine::kickRight3()
 	{
 		float Force = 1.0;	//!Force: 0.0~1.0
 //		float Direction = 0.0;	//!Direction: 0.0~30.0 
-		Vector3f BallLocalPostoBody_1 = WM.getBall().GetBallLocalPos() - WM.getSelf().GetHeadLocalPosition()  ;
+		Vector3f BallLocalPostoBody_1 = WM.getBall().GetLocalPos() - WM.getSelf().GetHeadLocalPosition()  ;
 		BallLocalPostoBody_1.z() = BallLocalPostoBody_1.x();
 		BallLocalPostoBody_1.x() = -BallLocalPostoBody_1.y();
 		BallLocalPostoBody_1.y() = BallLocalPostoBody_1.z();
 		BallLocalPostoBody_1.z() = 0.00;
-		Vector3f BallLocalPostoLeftFoot = WM.getBall().GetBallLocalPos() - WM.getSelf().GetLeftFootLocalPosition();
+		Vector3f BallLocalPostoLeftFoot = WM.getBall().GetLocalPos() - WM.getSelf().GetLeftFootLocalPosition();
 		BallLocalPostoLeftFoot.z() = BallLocalPostoLeftFoot.x();
 		BallLocalPostoLeftFoot.x() = -BallLocalPostoLeftFoot.y();
 		BallLocalPostoLeftFoot.y() = BallLocalPostoLeftFoot.z();
 		//BallLocalPostoLeftFoot.z() = 0.042;		//20%
 		BallLocalPostoLeftFoot.z() = 0.00;		//5%
-		Vector3f BallLocalPos = WM.getBall().GetBallLocalPos();
+		Vector3f BallLocalPos = WM.getBall().GetLocalPos();
 		BallLocalPos.z() = BallLocalPos.x();
 		BallLocalPos.x() = -BallLocalPos.y();
 		BallLocalPos.y() = BallLocalPos.z();
@@ -985,7 +985,7 @@ void NaoDynamicKickEngine::kickRight4()
 
 void NaoDynamicKickEngine::kickRight5()
 {	
-	Vector3f ball = WM.getBall().GetBallLocalPos();
+	Vector3f ball = WM.getBall().GetLocalPos();
 	Vector3f destpos = ball + Vector3f(-0.17, 0.0, 0.0);
 	Matrix torsor(Matrix::GetIdentity());
 	Matrix leftfoot(Matrix::GetIdentity());
@@ -1113,18 +1113,18 @@ void NaoDynamicKickEngine::pass3()
 		
 		float Force = 1.0;	//!Force: 0.0~1.0
 //		float Direction = 10.0;	//!Direction: 0.0~30.0
-		Vector3f BallLocalPostoBody = WM.getBall().GetBallLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
+		Vector3f BallLocalPostoBody = WM.getBall().GetLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
 		BallLocalPostoBody.z() = BallLocalPostoBody.x();
 		BallLocalPostoBody.x() = -BallLocalPostoBody.y();
 		BallLocalPostoBody.y() = BallLocalPostoBody.z();
 		BallLocalPostoBody.z() = 0.00;
-		Vector3f BallLocalPostoRightFoot = WM.getBall().GetBallLocalPos() - WM.getSelf().GetRightFootLocalPosition();
+		Vector3f BallLocalPostoRightFoot = WM.getBall().GetLocalPos() - WM.getSelf().GetRightFootLocalPosition();
 		BallLocalPostoRightFoot.z() = BallLocalPostoRightFoot.x();
 		BallLocalPostoRightFoot.x() = -BallLocalPostoRightFoot.y();
 		BallLocalPostoRightFoot.y() = BallLocalPostoRightFoot.z();
 // 		BallLocalPostoRightFoot.z() = 0.042;
 		BallLocalPostoRightFoot.z() = 0;
-		Vector3f BallLocalPos = WM.getBall().GetBallLocalPos();
+		Vector3f BallLocalPos = WM.getBall().GetLocalPos();
 		BallLocalPos.z() = BallLocalPos.x();
 		BallLocalPos.x() = -BallLocalPos.y();
 		BallLocalPos.y() = BallLocalPos.z();
@@ -1445,18 +1445,18 @@ void NaoDynamicKickEngine::passq3()
 		
 		float Force = 1.0;	//!Force: 0.0~1.0
 //		float Direction = 10.0;	//!Direction: 0.0~30.0
-		Vector3f BallLocalPostoBody = WM.getBall().GetBallLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
+		Vector3f BallLocalPostoBody = WM.getBall().GetLocalPos() - WM.getSelf().GetHeadLocalPosition() ;
 		BallLocalPostoBody.z() = BallLocalPostoBody.x();
 		BallLocalPostoBody.x() = -BallLocalPostoBody.y();
 		BallLocalPostoBody.y() = BallLocalPostoBody.z();
 		BallLocalPostoBody.z() = 0.00;
-		Vector3f BallLocalPostoRightFoot = WM.getBall().GetBallLocalPos() - WM.getSelf().GetRightFootLocalPosition();
+		Vector3f BallLocalPostoRightFoot = WM.getBall().GetLocalPos() - WM.getSelf().GetRightFootLocalPosition();
 		BallLocalPostoRightFoot.z() = BallLocalPostoRightFoot.x();
 		BallLocalPostoRightFoot.x() = -BallLocalPostoRightFoot.y();
 		BallLocalPostoRightFoot.y() = BallLocalPostoRightFoot.z();
 // 		BallLocalPostoRightFoot.z() = 0.042;
 		BallLocalPostoRightFoot.z() = 0;
-		Vector3f BallLocalPos = WM.getBall().GetBallLocalPos();
+		Vector3f BallLocalPos = WM.getBall().GetLocalPos();
 		BallLocalPos.z() = BallLocalPos.x();
 		BallLocalPos.x() = -BallLocalPos.y();
 		BallLocalPos.y() = BallLocalPos.z();

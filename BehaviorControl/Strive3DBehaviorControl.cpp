@@ -308,7 +308,7 @@ bool Strive3DBehaviorControl::GoToPointAndTurnTo(salt::Vector2f dest, double ang
 {
     Vector2f toDestination = dest - WM.getSelf().pos.to2D();
     Vector2f self = WM.getSelf().pos.to2D();
-    Vector3f ball = WM.getBall().GetBallLocalPos();
+    Vector3f ball = WM.getBall().GetLocalPos();
 
     double distanceToDestination = toDestination.Length();
     double angleToDestination = gNormalizeDeg(angle-WM.getSelf().GetTorsoYawAngle());
@@ -373,11 +373,14 @@ void Strive3DBehaviorControl::DribbleTo(salt::Vector2f dest)
     Vector2f ball = WM.getBall().pos.to2D();
     Vector2f agent = WM.getSelf().pos.to2D();
     Vector2f toball = ball - agent;
-    Vector3f localball = WM.getBall().GetBallLocalPos();
+    Vector3f localball = WM.getBall().GetLocalPos();
     Vector2f balltogoalin = localball.to2D() - WM.getFieldInfo().oppgoalcenterlocal.to2D();
 
 
-      double distancetoball = WM.getBall().GetBallDistance()*gCos(gDegToRad(WM.getBall().GetBallPhi()));
+     // double distancetoball = WM.getBall().GetBallDistance()*gCos(gDegToRad(WM.getBall().GetBallPhi()));
+      double distancetoball = (WM.getBall().pos.to2D() - WM.getSelf().pos.to2D()).Length();
+      //cout <<"#######################BALL"<<endl;
+      //cout<<distancetoball<<endl<<distancetoball2<<endl;
 //       double distancetoball = gSqrt(toball.x() * toball.x() + toball.y() * toball.y());
 
     static bool phase = 0;
@@ -420,7 +423,7 @@ bool Strive3DBehaviorControl::AdjustmentForKick(Vector2f dest)
     Vector2f desttoball = ball - dest;
     Vector3f LeftFootloc = WM.getSelf().GetLeftFootLocalPosition();
     Vector3f RightFootloc = WM.getSelf().GetRightFootLocalPosition();
-    Vector3f ballloc = WM.getBall().GetBallLocalPos();
+    Vector3f ballloc = WM.getBall().GetLocalPos();
 	Vector2f tmp(dist * gCos(desttoball.GetAngleRad()), dist * gSin(desttoball.GetAngleRad()));
 	double angle = desttoball.GetAngleDeg() - 180.0;
 	tmp = ball + tmp;
@@ -492,7 +495,7 @@ void Strive3DBehaviorControl::KickTo(Vector2f dest)
 
 void Strive3DBehaviorControl::LocalKickTo(Vector2f dest)
 {
-	Vector3f ball3f = WM.getBall().GetBallLocalPos();
+	Vector3f ball3f = WM.getBall().GetLocalPos();
 	Vector2f standpoint = ball3f.to2D() - dest;
 	standpoint = standpoint.Normalized() * 0.18 + ball3f.to2D();
 	Vector2f balltodest = dest -ball3f.to2D();
@@ -1187,7 +1190,7 @@ void	Strive3DBehaviorControl::Forward1OffDecision()
 	Vector2f ballpos = WM.getBall().pos.to2D();
 	if (WM.CanLocalize())
 	{
-	  Vector3f ball3f = WM.getBall().GetBallLocalPos();
+	  Vector3f ball3f = WM.getBall().GetLocalPos();
 	  Vector2f ballpos = ball3f.to2D();
 	}
 	else
@@ -1199,7 +1202,7 @@ void	Strive3DBehaviorControl::Forward1OffDecision()
 
 	Vector2f agentpos = WM.getSelf().pos.to2D();
 	Vector2f agenttoball = ballpos - agentpos;
-	Vector3f localball = WM.getBall().GetBallLocalPos();
+	Vector3f localball = WM.getBall().GetLocalPos();
 	Vector2f balltogoalin = localball.to2D() - WM.getFieldInfo().oppgoalcenterlocal.to2D();
 //	Vector2f dest = ballpos + agenttoball.Normalized() * 20;
 	float agenttoball_angle = gNormalizeDeg(agenttoball.GetAngleDeg());
@@ -2612,7 +2615,7 @@ bool Strive3DBehaviorControl::GoToBallForShoot(Vector2f destination)
 
 void Strive3DBehaviorControl::GoAroundBall(bool clockwise)
 {
-    Vector3f ball3f = WM.getBall().GetBallLocalPos();
+    Vector3f ball3f = WM.getBall().GetLocalPos();
     Vector2f localball = ball3f.to2D();
     Vector2f localdest;
 	Vector2f verticalvect;
@@ -2666,7 +2669,7 @@ bool Strive3DBehaviorControl::GoBeHindBall()
 bool Strive3DBehaviorControl::LocalViewGoToBallForShoot(salt::Vector2f destination)
 {
     double dist = 0.5;
-    Vector3f ball3f = WM.getBall().GetBallLocalPos();
+    Vector3f ball3f = WM.getBall().GetLocalPos();
     Vector2f ball = ball3f.to2D();
     Vector2f tmp = ball - destination;
     double angle = tmp.GetAngleRad();
@@ -2835,7 +2838,7 @@ void Strive3DBehaviorControl::CoverTeammate(float dist, Vector2f offset)
 void Strive3DBehaviorControl::ManToManDef(Player & player, float disttoball)
 {
 	Player& nearestplayertoball = WM.getOppTeamNearestToBall();
-	Vector3f localBallPos = WM.getBall().GetBallLocalPos();
+	Vector3f localBallPos = WM.getBall().GetLocalPos();
 	Vector2f theNearestOppToBallPos = nearestplayertoball.pos.to2D();
 	float distAgentToBall = localBallPos.to2D().Length();
 	
@@ -2843,7 +2846,7 @@ void Strive3DBehaviorControl::ManToManDef(Player & player, float disttoball)
 
 void Strive3DBehaviorControl::ClearanceKick()
 {
-	Vector3f localBall3f = WM.getBall().GetBallLocalPos();
+	Vector3f localBall3f = WM.getBall().GetLocalPos();
 	Vector2f localDest = localBall3f.to2D() * 3;
 	localDest.x() += -0.08;
 	GoToRelativePoint(localDest);
@@ -3119,7 +3122,7 @@ void Strive3DBehaviorControl::goliestatejudge()
 	switch ( goliestate )
     {
     case divingsave :
-    {	if((gAbs(Vector2f(WM.getBall().GetBallLocalPos().x(),WM.getBall().GetBallLocalPos().y()).Length()) < 5.0 )&&(gAbs(Vector2f(WM.getBall().GetBallLocalPos().x(),WM.getBall().GetBallLocalPos().y()).Length()) > 3.5 ))
+    {	if((gAbs(Vector2f(WM.getBall().GetLocalPos().x(),WM.getBall().GetLocalPos().y()).Length()) < 5.0 )&&(gAbs(Vector2f(WM.getBall().GetLocalPos().x(),WM.getBall().GetLocalPos().y()).Length()) > 3.5 ))
         {
 			DivingSave(true);
 		}
@@ -3134,8 +3137,8 @@ void Strive3DBehaviorControl::goliestatejudge()
     case getreadyfordivingsave :
     {
         float thetaoppandball = (WM.getOppTeamNearestToBall().pos.to2D()-WM.getBall().pos.to2D()).GetAngleDeg() ;
-        float destY = WM.getBall().GetBallLocalPos().y() - ((  WM.getFieldInfo().fieldlength/2+WM.getBall().GetBallLocalPos().x() )*gSin(thetaoppandball)/gCos(thetaoppandball));
-        float destX = gSin(thetaoppandball)/gCos(thetaoppandball)*((gAbs(destY)*0.8)-WM.getBall().GetBallLocalPos().y()) + WM.getBall().GetBallLocalPos().x();
+        float destY = WM.getBall().GetLocalPos().y() - ((  WM.getFieldInfo().fieldlength/2+WM.getBall().GetLocalPos().x() )*gSin(thetaoppandball)/gCos(thetaoppandball));
+        float destX = gSin(thetaoppandball)/gCos(thetaoppandball)*((gAbs(destY)*0.8)-WM.getBall().GetLocalPos().y()) + WM.getBall().GetLocalPos().x();
 
         if (gAbs(destY) <= 1.02)
             GoToPointAndTurnTo( Vector2f(0.4- WM.getFieldInfo().fieldlength/2, destY/2.5 ), thetaoppandball );
@@ -3258,7 +3261,7 @@ void Strive3DBehaviorControl::newgoliestatejudge()
 				float bottomline_y = -fieldlength/2 * funcoppball_k + funcoppball_b;
 				if((bottomline_y <= goalwidth/2) && (bottomline_y >= -goalwidth/2) && (ball.x() < opppos.x()))
 				{
-					if((WM.Oppshooting())&&(gAbs(Vector2f(WM.getBall().GetBallLocalPos().x(),WM.getBall().GetBallLocalPos().y()).Length()) > 1.8) && (opppos.x() < 5.5 - fieldlength/2))
+					if((WM.Oppshooting())&&(gAbs(Vector2f(WM.getBall().GetLocalPos().x(),WM.getBall().GetLocalPos().y()).Length()) > 1.8) && (opppos.x() < 5.5 - fieldlength/2))
 					{
 						if(bottomline_y >= self.y())
 						{

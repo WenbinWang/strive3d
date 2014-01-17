@@ -103,8 +103,8 @@ void NaoHeadControl::LookAtBall()
 	if(WM.SeeBall())
 	{
 		float pitch, yaw;
-		pitch = gNormalizeDeg(WM.getBall().GetBallPhi());
-		yaw = gNormalizeDeg(WM.getBall().GetBallTheta());
+		pitch = gNormalizeDeg(WM.getVisionSense(BALL).phi);
+		yaw = gNormalizeDeg(WM.getVisionSense(BALL).theta);
 		aLOG << "yaw : " << yaw << "  pitch : "<< pitch << endl;
 		pitch = pitch + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_1].q);
 		yaw = yaw + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_2].q);
@@ -334,9 +334,9 @@ void NaoHeadControl::LookAtOurGoal()
 		oLOG << "Can See Both of the Goals" << endl;
 		float yaw, pitch;
 		yaw = (ourLeftGoal.theta + ourRightGoal.theta) / 2.0;
-		yaw = (yaw + gNormalizeDeg(WM.getBall().GetBallTheta())) / 2.0;
+		yaw = (yaw + gNormalizeDeg(ball.theta)) / 2.0;
 		pitch = (ourLeftGoal.phi + ourRightGoal.phi) / 2.0;
-		pitch = (pitch + gNormalizeDeg(WM.getBall().GetBallPhi())) / 2.0;
+		pitch = (pitch + gNormalizeDeg(ball.phi)) / 2.0;
 		yaw = gNormalizeDeg(yaw) + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_2].q);
 		pitch = gNormalizeDeg(pitch) + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_1].q);
 		setJointsDirect(yaw,pitch);
@@ -373,9 +373,9 @@ void NaoHeadControl::LookAtOppGoal()
 		oLOG << "Can See Both of the Goals" << endl;
 		float yaw, pitch;
 		yaw = (oppLeftGoal.theta + oppRightGoal.theta) / 2.0;
-		yaw = (yaw + gNormalizeDeg(WM.getBall().GetBallTheta())) / 2.0;
+		yaw = (yaw + gNormalizeDeg(ball.theta)) / 2.0;
 		pitch = (oppLeftGoal.phi + oppRightGoal.phi) / 2.0;
-		pitch = (pitch + gNormalizeDeg(WM.getBall().GetBallPhi())) / 2.0;
+		pitch = (pitch + gNormalizeDeg(ball.theta)) / 2.0;
 		yaw = gNormalizeDeg(yaw) + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_2].q);
 		pitch = gNormalizeDeg(pitch) + gRadToDeg(NAO->GetLink()[Nao::JID_HEAD_1].q);
 		setJointsDirect(yaw,pitch);
@@ -499,8 +499,8 @@ void NaoHeadControl::RealSlowScan()
 void NaoHeadControl::ReturnToBall()
 {
     float pitch, yaw;
-    pitch = gNormalizeDeg(WM.getBall().GetBallPhi());
-    yaw = gNormalizeDeg(WM.getBall().GetBallTheta());
+    pitch = gNormalizeDeg(WM.getVisionSense(BALL).phi);
+    yaw = gNormalizeDeg(WM.getVisionSense(BALL).theta);
     aLOG << "yaw : " << yaw << "  pitch : "<< pitch << endl;
 
     setJoints(yaw, pitch);

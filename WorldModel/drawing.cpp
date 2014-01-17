@@ -22,6 +22,7 @@
 
 
 #include "drawing.h"
+#include <deque>
 #define ROBOVIS_HOST "localhost"
 #define ROBOVIS_PORT "32769"
 #define TEST_DURATION 10000
@@ -108,9 +109,25 @@ float Drawing::maxf(float a, float b) {
   return a > b ? a : b;
 }
 
+void Drawing::draw_trajectory(salt::Vector3f pos)
+{
+    
+    string n1("animated.trajectory");
+     traj.push_back(pos);
+     if (traj.size()>300)
+          traj.pop_front();
+       // cout<<"\n################"<<endl;
+        for(deque<int>::size_type ix=0;ix!=traj.size();++ix)
+        {
+               drawPoint(traj[ix][0],traj[ix][1],0,2,100,10,10,&n1);
+        }
+      string staticSets("animated");
+      swapBuffers(&staticSets);
+}
+
 void Drawing::renderAnimatedShapes(salt::Vector3f pos) {
   string n1("animated.points");
-  drawPoint(pos[0],pos[1],pos[2],5,0,0,0,&n1);
+  drawPoint(pos[0],pos[1],0,10,255,0,0,&n1);
 //   angle += 0.05;
 // 
 //   string n1("animated.points");

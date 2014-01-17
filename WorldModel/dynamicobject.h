@@ -34,6 +34,7 @@ public:
 	virtual ~DynamicObject() {}
 	salt::Vector3f posbyhearing;
 	int mTimeNotRefresh;
+	vector<Vector2f> posInMemory;
 	
 	queue<Vector3f> positionqueue;	//By Qu Junjun 2009.10.4		Recorde The Past Position For Vel Cauculating
 	vector<Vector3f> area;			//By Qu Junjun 2009.10.4		The Posible Moving Area Of The Player
@@ -45,7 +46,11 @@ public:
 	float getLastUpdateTime(){return mLastUpdateTime;}
 	
 	void setLastUpdateTime(float arg){mLastUpdateTime = arg;}
+	
 	//Zheng Yonglei 2009.1.19 [end]
+	
+	void setLocalPos(Vector3f pos_){pos_local = pos_;}
+	void setGlobalPos(Vector3f pos_){pos = pos_;}
 };
 
 #endif

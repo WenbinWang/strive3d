@@ -115,8 +115,6 @@ void Self::setRFForce( int i, float value )
 void Self::UpdateRobotMatrix(const Matrix& mat)
 {
     ++CurrentCycle;
-    pos = mat.Pos();
-    aLOG << "pos from matrix:" << pos << endl;
     aLOG<<"before transform: " << endl
     << mat.Right() << endl
     << mat.Up() << endl

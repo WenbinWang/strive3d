@@ -17,6 +17,7 @@
 #include "rvdraw.h"
 #include <iostream>
 #include "vector.h"
+#include <deque>
 
 
 #define ROBOVIS_HOST "localhost"
@@ -42,12 +43,13 @@ class Drawing
 	void renderStaticShapes();
 	void runTest();
 	int connect();
+	void draw_trajectory(salt::Vector3f pos);
     private:
         struct addrinfo hints, *servinfo;
 	int sockfd;
 	struct addrinfo* p;
 	double angle;
 	Rvdraw* rd;
-	
+	std::deque<salt::Vector3f> traj;
 };
 #endif

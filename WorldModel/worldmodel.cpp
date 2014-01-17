@@ -58,6 +58,7 @@ WorldModel::WorldModel() :mHearCycles(0),mSimTime(0.0f),mLastSimTime(0.0f)
 	mCanHitout = false;
 	Init();
     mOppTeamNearestToBall = NULL; 
+    dr = new Drawing();
 }
 
 WorldModel::~WorldModel()
@@ -393,6 +394,7 @@ void WorldModel::Update(const string& message)
 	if (mSimTime > 1.0f && gAbs(mSimTime - mLastSimTime - 0.02) > 1e-3)
 		cerr << "(Time Jump) "<< mLastSimTime << " " << mSimTime << endl;
     aLOG<<"################ Update Finished  #################"<<endl;
+    dr->draw_trajectory(mSelf->pos);
 }
 
 void WorldModel::UpdateSelf()

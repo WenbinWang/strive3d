@@ -30,6 +30,7 @@
 #include "StaticModule.h"
 #include "convexhullmanager.h"
 #include "ball.h"
+#include "drawing.h"
 #define WM StaticModule<WorldModel>::getInstance()
 #define MAX_TEAM_SIZE 11
 using namespace salt;
@@ -135,6 +136,7 @@ protected:
 	void IsCanHitout();
 
 private:
+	Drawing *dr;
 	Parser *mParser;//Neil 2009.3
 
 	Self *mSelf;

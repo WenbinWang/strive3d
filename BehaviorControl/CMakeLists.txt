@@ -5,14 +5,12 @@ INCLUDE_DIRECTORIES( 	../ ../Action ../AdvancedAgent ../BehaviorControl
  )
 
 SET(	BehaviorControl_LIB_HDRS
-BehaviorControl.h          NaoBehaviorControl.h       XabslBehaviorControl.h
+BehaviorControl.h          
 BehaviorControlSelector.h  Strive3DBehaviorControl.h
-CommonBasicBehaviors.h     WalkPathPlanningControl.h
 )
 
 SET(	BehaviorControl_LIB_SRCS
-CommonBasicBehaviors.cpp  Strive3DBehaviorControl.cpp  XabslBehaviorControl.cpp
-NaoBehaviorControl.cpp    WalkPathPlanningControl.cpp
+Strive3DBehaviorControl.cpp  
 )
 
 ADD_LIBRARY(BehaviorControl ${BehaviorControl_LIB_SRCS} ${BehaviorControl_LIB_HDRS})

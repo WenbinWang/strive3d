@@ -24,8 +24,8 @@
 #include "ModuleHandler.h"
 #include "ModuleSelector.h"
 #include "Strive3DBehaviorControl.h"
-#include "NaoBehaviorControl.h"
-#include "WalkPathPlanningControl.h"
+//#include "NaoBehaviorControl.h"
+//#include "WalkPathPlanningControl.h"
 
 /**
 * BehaviorControl selection module.
@@ -61,10 +61,10 @@ public:
     	{
     	case SolutionRequest::strive3DBehaviorControl:
       		return new Strive3DBehaviorControl(moduleHandler,*this);
-	case SolutionRequest::naoBehaviorControl:
-		return new NaoBehaviorControl(moduleHandler,*this);
-	case SolutionRequest::walkPathPlanningControl:
-		return new WalkPathPlanningControl(moduleHandler,*this);
+//	case SolutionRequest::naoBehaviorControl:
+//		return new NaoBehaviorControl(moduleHandler,*this);
+//	case SolutionRequest::walkPathPlanningControl:
+//		return new WalkPathPlanningControl(moduleHandler,*this);
 
     //case SolutionRequest::strive3DBehaviorControlAgentBasicsTester:
       //return new Xabsl2BehaviorControlAgentInterface("basics-tester",new Strive3DBehaviorControl(*this),*this);

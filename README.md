@@ -23,3 +23,5 @@ Robocup 3d simulation league, Shanghai University, Strive Team.
     Kill agent process:
         
         $sh kill.sh
+
+strive3d, shanghai university rc3d team

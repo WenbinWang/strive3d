@@ -31,6 +31,7 @@
 #include "convexhullmanager.h"
 #include "ball.h"
 #include "drawing.h"
+#include "newBall.h"
 #define WM StaticModule<WorldModel>::getInstance()
 #define MAX_TEAM_SIZE 11
 using namespace salt;
@@ -94,6 +95,12 @@ public:
 	bool Oppshooting();
 
 	bool Prepare;
+	
+	
+	//added
+	salt::Matrix getVisionPerceptorMatrix(){
+	  return 	mVisionPerceptorMatrix;
+	}
 		
 protected:
 	
@@ -134,9 +141,23 @@ protected:
 	void RoleAssignment_forward2();
 	
 	void IsCanHitout();
+	
+	//added by wenbin
+	void updateNewBall();
+	bool CanSeeBall(){
+	  if(mVisionSenseMap[BALL].distance > 0)
+	    iCanSeeBall = true;
+	  else
+	    iCanSeeBall = false;
+	  return iCanSeeBall;
+	}
 
 private:
 	Drawing *dr;
+	NBall *nBall;
+	bool iCanSeeBall;
+	
+	
 	Parser *mParser;//Neil 2009.3
 
 	Self *mSelf;

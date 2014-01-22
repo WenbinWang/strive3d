@@ -25,9 +25,10 @@ using namespace std;
 using namespace salt;
 class DynamicObject : public Object
 {
-protected:
+public:
 	bool mIsValid;
 	float mLastUpdateTime;	
+	Vector3f vel;
 	Vector3f pos_by_hearing;
 	
 public:

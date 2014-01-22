@@ -5,12 +5,12 @@ INCLUDE_DIRECTORIES(	../ ../Action ../AdvancedAgent ../BehaviorControl
  )
 
 SET(	WorldModel_LIB_HDRS
-object.h	ball.h        convexhullmanager.h  fieldinfo.h  self.h
+object.h	ball.h        convexhullmanager.h  fieldinfo.h  self.h    newBall.h    newDynamicObject.h
 convexhull.h  dynamicobject.h      player.h     worldmodel.h     drawing.h  rvdraw.h
 )
 
 SET(	WorldModel_LIB_SRCS
-ball.cpp        convexhullmanager.cpp  player.cpp  worldmodel.cpp
+ball.cpp        convexhullmanager.cpp  player.cpp  worldmodel.cpp  newBall.cpp newDynamicObject.cpp
 convexhull.cpp  fieldinfo.cpp          self.cpp     drawing.cpp  rvdraw.cpp
 )
 

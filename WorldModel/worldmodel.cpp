@@ -27,6 +27,7 @@
 #include "geometry.h"
 #include <cctype>
 #include "Utilities.h"
+#include "newBall.h"
 
 using namespace std;
 using namespace boost;
@@ -58,7 +59,10 @@ WorldModel::WorldModel() :mHearCycles(0),mSimTime(0.0f),mLastSimTime(0.0f)
 	mCanHitout = false;
 	Init();
     mOppTeamNearestToBall = NULL; 
+    // added on 1.23
     dr = new Drawing();
+    nBall = new NBall();
+    
 }
 
 WorldModel::~WorldModel()
@@ -324,6 +328,7 @@ void WorldModel::Update(const string& message)
 	UpdateSelf();
     //Set local and global pos (if can localize),  renew
 	UpdateBall();
+	updateNewBall();
     //update hear info
 	UpdateWithHearInfomation();
 	if(mCanLocalize)
@@ -416,11 +421,20 @@ void WorldModel::UpdateSelf()
 	mSelf->renew();
 }
 
+void WorldModel::updateNewBall()
+{
+  if (CanSeeBall())
+  {
+    nBall->updateFromVision(mVisionSenseMap[BALL]);
+    nBall->printVisionModel();
+  }
+}
+
 void WorldModel::UpdateBall()
 {	
     aLOG<<"### UpdateBall"<<endl;
-	mBall->SetLocalPos(mVisionSenseMap[BALL].localPos);
-	mBall->SetDistanceToSelf(mVisionSenseMap[BALL].distanceToSelf);
+	mBall->setLocalPos(mVisionSenseMap[BALL].localPos);
+	mBall->setDistance(mVisionSenseMap[BALL].distanceToSelf);
 	if(mCanLocalize && mBall->GetDistanceToSelf() > 0)
 	{
 		mBall->setPos(mVisionPerceptorMatrix * (mVisionSenseMap[BALL].localPos));
@@ -433,6 +447,10 @@ void WorldModel::UpdateBall()
 		else
 			mICanSeeBall = false;
 	}
+     cout<<"************** OLD BALL ***********************"<<endl;
+     cout<<"G_POS:"<<mBall->pos<<endl;
+     cout<<"L_POS:"<<mBall->pos_local<<endl;
+     cout<<"DIST: "<<mBall->distance<<endl;
 }
 
 void WorldModel::UpdatePlayers()//Neil 2009.3

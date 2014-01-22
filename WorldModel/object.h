@@ -6,11 +6,14 @@ class Object
 {
 public:
   	salt::Vector3f pos;
-	salt::Vector3f vel;
 	salt::Vector3f pos_local;
-	double distanceToSelf;
-	void SetDistanceToSelf(double distance){distanceToSelf = distance;}
-	double GetDistanceToSelf(){return distanceToSelf;}
+	double distance;
+	double angle;
+public:
+	void setDistance(double distance){distance = distance;}
+	double GetDistanceToSelf(){return distance;}
+	
+	void setLocalPos(Vector3f l_pos){pos_local = l_pos;}
 
 };
 #endif
